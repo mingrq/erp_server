@@ -1,4 +1,0 @@
-dependencies {
-    //底层公共模块
-    compile project(':business')
-}
