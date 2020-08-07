@@ -15,12 +15,12 @@
     </context:component-scan>
 
 
-
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
+    <!--
     <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
         <mvc:message-converters register-defaults="true">
-            <!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->
+            &lt;!&ndash; 将StringHttpMessageConverter的默认编码设为UTF-8 &ndash;&gt;
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <constructor-arg value="UTF-8"/>
             </bean>
@@ -28,14 +28,14 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+    -->
 
-
-    <mvc:cors>
-        <!--接口跨域处理-->
-        <mvc:mapping path="/webapp/**"/>
-        <!--上传跨域处理-->
-        <mvc:mapping path="/image/**"/>
-    </mvc:cors>
+    <!--<mvc:cors>-->
+    <!--接口跨域处理-->
+    <!--<mvc:mapping path="/webapp/**"/>-->
+    <!--上传跨域处理-->
+    <!--<mvc:mapping path="/image/**"/>-->
+    <!--</mvc:cors>-->
 
     <mvc:default-servlet-handler/>
     <!-- ②：拦截器的配置 -->
@@ -44,12 +44,12 @@
         <mvc:interceptor>
             <mvc:mapping path="/admin/*"/>
             <mvc:mapping path="/admin/**/*"/>
-            <mvc:mapping path="/druid/*"/><!--阿里数据库监控-->
+            <!--<mvc:mapping path="/druid/*"/>--><!--阿里数据库监控-->
             <mvc:exclude-mapping path="/admin/main/login"/>
-            <bean class="com.inxedu.os.common.intercepter.IntercepterAdmin"></bean>
+            <bean class="com.factory.erp.web.common.intercepter.IntercepterAdmin"></bean>
         </mvc:interceptor>
         <!-- 前台网站配置拦截器配置 -->
-        <mvc:interceptor>
+        <!--<mvc:interceptor>
             <mvc:mapping path="/**/*"/>
             <mvc:exclude-mapping path="/group/**"/>
             <mvc:exclude-mapping path="/static/**/*"/>
@@ -59,17 +59,17 @@
             <mvc:exclude-mapping path="/webapp/**/*"/>
             <bean class="com.inxedu.os.common.intercepter.LimitIntercepterForWebsite">
             </bean>
-        </mvc:interceptor>
+        </mvc:interceptor>-->
 
         <!-- 网站APP接口拦截器配置 -->
-        <mvc:interceptor>
+        <!--<mvc:interceptor>
             <mvc:mapping path="/webapp/*"/>
             <mvc:mapping path="/webapp/**/*"/>
             <bean class="com.inxedu.os.common.intercepter.IntercepterWebappApi">
             </bean>
-        </mvc:interceptor>
+        </mvc:interceptor>-->
         <!-- 前台用户登录拦截器配置 -->
-        <mvc:interceptor>
+        <!--<mvc:interceptor>
             <mvc:mapping path="/uc/*"/>
             <mvc:mapping path="/uc/**/*"/>
             <mvc:mapping path="/groupuc/*"/>
@@ -77,15 +77,15 @@
 
             <bean class="com.inxedu.os.common.intercepter.IntercepterWebLogin">
             </bean>
-        </mvc:interceptor>
+        </mvc:interceptor>-->
         <!-- 访问日志 -->
-        <mvc:interceptor>
+        <!--<mvc:interceptor>
             <mvc:mapping path="/**/*"/>
             <mvc:exclude-mapping path="/static/**/*"/>
             <mvc:exclude-mapping path="/kindeditor/**/*"/>
             <bean class="com.inxedu.os.common.intercepter.LoggerFilter">
             </bean>
-        </mvc:interceptor>
+        </mvc:interceptor>-->
     </mvc:interceptors>
     <!-- ③：对模型视图名称的解析，即在模型视图名称添加前后缀 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -106,8 +106,7 @@
     </bean>
 
     <!-- 文件上传限制大小 -->
-    <bean id="multipartResolver"
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- set the max upload size 10MB -->
         <property name="maxUploadSize">
             <value>30485760</value>
@@ -118,13 +117,13 @@
     </bean>
 
     <!-- 将Controller抛出的异常转到特定View, 保持SiteMesh的装饰效果 -->
-    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    <!--<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
             <props>
                 <prop key="org.apache.shiro.authz.UnauthorizedException">/WEB-INF/view/common/error/403</prop>
                 <prop key="java.lang.Throwable">/common/error</prop>
             </props>
         </property>
-    </bean>
+    </bean>-->
 
 </beans>
